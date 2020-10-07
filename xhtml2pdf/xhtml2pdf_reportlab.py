@@ -175,10 +175,7 @@ class PmlBaseDoc(BaseDocTemplate):
             raise TypeError("Argument pt should be string or integer or list")
 
     def _has_template_for_name(self, name):
-        for template in self.pageTemplates:
-            if template.id == name.strip():
-                return True
-        return False
+        return any(template.id == name.strip() for template in self.pageTemplates)
 
 
 class PmlPageTemplate(PageTemplate):
@@ -505,8 +502,7 @@ class PmlImage(Flowable, PmlMaxHeightMixIn):
         return self.dWidth, self.dHeight
 
     def getImage(self):
-        img = PmlImageReader(six.BytesIO(self._imgdata))
-        return img
+        return PmlImageReader(six.BytesIO(self._imgdata))
 
     def draw(self):
         img = self.getImage()
@@ -518,8 +514,7 @@ class PmlImage(Flowable, PmlMaxHeightMixIn):
             mask=self._mask)
 
     def identity(self, maxLen=None):
-        r = Flowable.identity(self, maxLen)
-        return r
+        return Flowable.identity(self, maxLen)
 
 
 class PmlParagraphAndImage(ParagraphAndImage, PmlMaxHeightMixIn):

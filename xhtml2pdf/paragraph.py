@@ -188,7 +188,7 @@ class Space(Fragment):
         self["width"] = stringWidth(" ", self["fontName"], self["fontSize"])
 
 
-class LineBreak(Fragment):
+class LineBreak((Fragment)):
     """
     Line break.
     """
@@ -196,8 +196,6 @@ class LineBreak(Fragment):
     name = "br"
     isSoft = True
     isLF = True
-
-    pass
 
 
 class BoxBegin(Fragment):
@@ -221,10 +219,8 @@ class BoxEnd(Fragment):
         self["width"] = self.get("marginRight", 0) + self.get("paddingRight", 0) # + border
 
 
-class Image(Fragment):
+class Image((Fragment)):
     name = "image"
-
-    pass
 
 
 class Line(list):

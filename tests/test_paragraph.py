@@ -51,8 +51,7 @@ class LegacyParagraphTests(unittest.TestCase):
                     )
 
         def createText(data, fn, fs):
-            text = Text(list(textGenerator(data, fn, fs)))
-            return text
+            return Text(list(textGenerator(data, fn, fs)))
 
         def makeBorder(width, style="solid", color=Color(1, 0, 0)):
             return dict(

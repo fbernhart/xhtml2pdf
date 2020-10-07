@@ -79,24 +79,6 @@ class TableData:
         if c.frag.backColor and mode != "tr":  # XXX Stimmt das so?
             self.add_style(('BACKGROUND', begin, end, c.frag.backColor))
 
-        if 0:
-            log.debug("%r", (
-                begin,
-                end,
-                c.frag.borderTopWidth,
-                c.frag.borderTopStyle,
-                c.frag.borderTopColor,
-                c.frag.borderBottomWidth,
-                c.frag.borderBottomStyle,
-                c.frag.borderBottomColor,
-                c.frag.borderLeftWidth,
-                c.frag.borderLeftStyle,
-                c.frag.borderLeftColor,
-                c.frag.borderRightWidth,
-                c.frag.borderRightStyle,
-                c.frag.borderRightColor,
-            ))
-
         if getBorderStyle(c.frag.borderTopStyle) and c.frag.borderTopWidth and c.frag.borderTopColor is not None:
             self.add_style(('LINEABOVE', begin, (end[0], begin[1]),
                             c.frag.borderTopWidth,

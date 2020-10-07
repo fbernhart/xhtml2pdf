@@ -948,18 +948,19 @@ COLOR_BY_NAME = {
 
 def get_default_asian_font():
 
-        lower_font_list = []
-        upper_font_list = []
+    lower_font_list = []
+    upper_font_list = []
 
-        list = copy(reportlab.pdfbase._cidfontdata.defaultUnicodeEncodings)
-        list = list.keys()
+    list = copy(reportlab.pdfbase._cidfontdata.defaultUnicodeEncodings)
+    list = list.keys()
 
-        for font in list:
-            upper_font_list.append(font)
-            lower_font_list.append(font.lower())
-        default_asian_font = {lower_font_list[i]: upper_font_list[i] for i in range(len(lower_font_list))}
-
-        return default_asian_font
+    for font in list:
+        upper_font_list.append(font)
+        lower_font_list.append(font.lower())
+    return {
+        lower_font_list[i]: upper_font_list[i]
+        for i in range(len(lower_font_list))
+    }
 
 
 def set_asian_fonts(fontname):

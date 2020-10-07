@@ -138,14 +138,13 @@ class pisaLinkLoader:
                 suffix = new_suffix
         path = tempfile.mktemp(prefix="pisa-", suffix=suffix)
         ufile = urllib2.urlopen(url)
-        tfile = open(path, "wb")
-        while True:
-            data = ufile.read(1024)
-            if not data:
-                break
-            tfile.write(data)
-        ufile.close()
-        tfile.close()
+        with open(path, "wb") as tfile:
+            while True:
+                data = ufile.read(1024)
+                if not data:
+                    break
+                tfile.write(data)
+            ufile.close()
         self.tfileList.append(path)
 
         if not self.quiet:

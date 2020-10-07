@@ -826,7 +826,7 @@ class CSSParser(object):
             elif blockIdx is None:
                 # consume the rest of the content since we didn't find a block or a semicolon
                 src = src[-1:-1]
-            elif blockIdx is not None:
+            else:
                 # expecing a block...
                 src = src[blockIdx:]
                 try:
@@ -835,9 +835,6 @@ class CSSParser(object):
                 except self.ParseError:
                     # try to parse it as a stylesheet block
                     src, stylesheet = self._parseStylesheet(src)
-            else:
-                raise self.ParserError('Unable to ignore @-rule block', src, ctxsrc)
-
         return src.lstrip(), result
 
 
@@ -967,8 +964,8 @@ class CSSParser(object):
             attrValue, src = self._getIdent(src)
             if attrValue is None:
                 attrValue, src = self._getString(src)
-                if attrValue is None:
-                    raise self.ParseError('Expected a selector attribute value', src, ctxsrc)
+            if attrValue is None:
+                raise self.ParseError('Expected a selector attribute value', src, ctxsrc)
         else:
             attrValue = None
 
@@ -1108,9 +1105,7 @@ class CSSParser(object):
 
         if operator is None and returnList:
             term = self.cssBuilder.combineTerms(term, None, None)
-            return src, term
-        else:
-            return src, term
+        return src, term
 
 
     def _parseExpressionTerm(self, src):

@@ -201,7 +201,7 @@ class CSSCascadeStrategy(object):
 
 
     def findCSSRulesForEach(self, element, attrNames):
-        rules = dict((name, []) for name in attrNames)
+        rules = {name: [] for name in attrNames}
 
         inline = element.getInlineStyle()
         for ruleset in self.iterCSSRulesets(inline):

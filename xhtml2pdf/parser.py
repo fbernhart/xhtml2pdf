@@ -76,12 +76,11 @@ def pisaGetAttributes(c, tag, attributes):
             # print k, v
             # defaults, wenn vorhanden
             if type(v) == tuple:
-                if v[1] == MUST:
-                    if k not in attrs:
-                        log.warning(
-                            c.warning("Attribute '%s' must be set!", k))
-                        nattrs[k] = None
-                        continue
+                if v[1] == MUST and k not in attrs:
+                    log.warning(
+                        c.warning("Attribute '%s' must be set!", k))
+                    nattrs[k] = None
+                    continue
                 nv = attrs.get(k, v[1])
                 dfl = v[1]
                 v = v[0]
@@ -255,12 +254,14 @@ def CSSCollect(node, c):
 
         _key = getCSSAttrCacheKey(node)
 
-        if hasattr(node.parentNode, "tagName"):
-            if node.parentNode.tagName.lower() != "html":
-                CachedCSSAttr = CSSAttrCache.get(_key, None)
-                if CachedCSSAttr is not None:
-                    node.cssAttrs = CachedCSSAttr
-                    return CachedCSSAttr
+        if (
+            hasattr(node.parentNode, "tagName")
+            and node.parentNode.tagName.lower() != "html"
+        ):
+            CachedCSSAttr = CSSAttrCache.get(_key, None)
+            if CachedCSSAttr is not None:
+                node.cssAttrs = CachedCSSAttr
+                return CachedCSSAttr
 
         node.cssElement = cssDOMElementInterface.CSSDOMElementInterface(node)
         node.cssAttrs = {}

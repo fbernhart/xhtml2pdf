@@ -152,11 +152,7 @@ _relSizeTable = {
 
 
 def getNextPart(parts):
-    if parts:
-        part = parts.pop(0)
-    else:
-        part = None
-    return part
+    return parts.pop(0) if parts else None
 
 
 def isSize(value):

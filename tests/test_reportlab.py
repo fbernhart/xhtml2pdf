@@ -9,7 +9,7 @@ class PTCycleTest(unittest.TestCase):
     def test_cyclicIterator(self):
         ptcycle = xhtml2pdf_reportlab.PTCycle()
         ptcycle.extend(range(10))
-        for ele in ptcycle:
+        for _ in ptcycle:
             pass
 
 

@@ -17,8 +17,7 @@ def buildTestSuite():
     return suite
 
 def main():
-    results = unittest.TextTestRunner().run(buildTestSuite())
-    return results
+    return unittest.TextTestRunner().run(buildTestSuite())
 
 if __name__ == "__main__":
     results = main()
